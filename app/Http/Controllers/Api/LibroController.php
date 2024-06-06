@@ -87,7 +87,7 @@ class LibroController extends Controller
      */
     public function show(Libro $libro)
     {
-        $libro->load(['usuario','generos']);
+        $libro->load(['usuario','generos','autor']);
         return response()->json($libro, 200);
     }
 
@@ -96,7 +96,7 @@ class LibroController extends Controller
      */
     public function update(LibroRequest $request, Libro $libro)
     {
-        $libro->nombre = $request->nombre;
+        /*$libro->nombre = $request->nombre;
         $libro->descripcion = $request->descripcion;
         $libro->precio = $request->precio;
         $libro->paginas = $request->paginas;
@@ -104,6 +104,54 @@ class LibroController extends Controller
         $libro->id_usuario = $request->id_usuario;
         $libro->id_lista = $request->id_lista;
         $libro->save();
+
+        return response()->json($libro, 201);*/
+
+        $libro->nombre = $request->nombre;
+        $libro->descripcion = $request->descripcion;
+        $libro->precio = $request->precio;
+        $libro->paginas = $request->paginas;
+
+        if($request->id_autor == 'otros'){
+            $autor = new Autor();
+            $autor->nombre = $request->newAutor;
+            $autor->isVerificado = false;
+            $autor->save();
+            $libro->id_autor = $autor->id;
+        }else{
+            $libro->id_autor = $request->id_autor;
+        }
+
+        if ($request->imagen != $libro->imagen) {
+            $imagenBase64 = $request->imagen;
+    
+            list($tipo, $datosBase64) = explode(';', $imagenBase64);
+            list(, $datosBase64) = explode(',', $datosBase64);
+    
+            $extension = explode('/', $tipo)[1];
+            $imagenDecodificada = base64_decode($datosBase64);
+            $nombreImagen = 'libro_'. uniqid().'.'.$extension; 
+            $rutaImagen = public_path('img/libros/' . $nombreImagen);
+            
+            $rutaImagenBD = '/img/libros/' . $nombreImagen;
+            file_put_contents($rutaImagen, $imagenDecodificada);
+
+            $libro->imagen = $rutaImagenBD;
+        }
+
+        $libro->save();
+        
+        foreach ($request['generosLibro'] as $genero) {
+            if($genero['id'] == "otros"){
+                $genero = new Genero();
+                $genero->nombre = $request->newGenero;
+                $genero->isVerificado = false;
+                $genero->save();
+                $libro->generos()->attach($genero->id);
+            }else{
+                $libro->generos()->attach($genero['id']);
+            }
+        }
 
         return response()->json($libro, 201);
     }

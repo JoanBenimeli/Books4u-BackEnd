@@ -20,12 +20,10 @@ return new class extends Migration
             $table->string('imagen');
             $table->unsignedBigInteger('id_autor');
             $table->unsignedBigInteger('id_usuario');
-            $table->unsignedBigInteger('id_lista')->nullable();
             $table->timestamps();
 
             $table->foreign("id_usuario")->references("id")->on("usuarios")->onDelete("cascade");
             $table->foreign("id_autor")->references("id")->on("autores")->onDelete("cascade");
-            $table->foreign("id_lista")->references("id")->on("listas")->onDelete("cascade");
         }); 
     }
 

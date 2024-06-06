@@ -22,7 +22,6 @@ class LibroFactory extends Factory
             'imagen' => 'img/default/bookDefault.jpg',
             'precio' => $this->faker->numberBetween($min = 0, $max = 100),
             'paginas' => $this->faker->numberBetween($min = 1, $max = 1000),
-            'id_lista' => 1
         ];
     }
 }

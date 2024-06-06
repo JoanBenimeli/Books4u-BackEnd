@@ -29,7 +29,7 @@ class LoginController extends Controller
         $usuario = $request->user();
 
         if ($usuario) {
-            $usuario->load('lista');
+            $usuario->load('lista','libros');
 
             return response()->json($usuario);
         } else {
