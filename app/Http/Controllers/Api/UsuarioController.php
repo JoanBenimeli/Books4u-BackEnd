@@ -7,6 +7,7 @@ use App\Models\Usuario;
 use App\Models\Lista;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class UsuarioController extends Controller
 {
@@ -75,7 +76,7 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, Usuario $usuario)
+    public function update(UserUpdateRequest $request, Usuario $usuario)
     {
         $usuario->nombre = $request->nombre;
         $usuario->nick = $request->nick;

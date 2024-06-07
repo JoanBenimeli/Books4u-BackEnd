@@ -13,7 +13,7 @@ class RolesSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['admin', 'default', 'local'];
+        $roles = ['Básico', 'Admin'];
 
         foreach ($roles as $rol) {
             Rol::create(['nombre' => $rol]);

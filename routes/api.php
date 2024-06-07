@@ -29,17 +29,8 @@ Route::apiResource('comentarios', ComentarioController::class)->only(['index', '
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-
     Route::post('logout', [LoginController::class, 'logout']);
     Route::get('userLog', [LoginController::class, 'user']);
-
-    /*Route::post('factura', function(Request $request){
-
-        $usuario = (object)$request->usuario;
-        Mail::to($usuario->email)
-            ->send(new facturaMailable($request));
-        return 'Mensaje enviado!';
-    });*/
 
     Route::post('factura', [PdfController::class, 'generateAndSendPdf']);
 
