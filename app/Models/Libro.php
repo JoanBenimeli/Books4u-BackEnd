@@ -18,7 +18,7 @@ class Libro extends Model
     }
 
     public function autor(){
-        return $this->belongsTo(Autor::class);
+        return $this->belongsTo(Autor::class, 'id_autor');
     }
 
     public function generos()
