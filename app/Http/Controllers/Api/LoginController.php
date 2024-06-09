@@ -15,9 +15,9 @@ class LoginController extends Controller
         $usuario = Usuario::where('email', $request->email)->first();
 
         if (!$usuario || !Hash::check($request->password, $usuario->password)) {
-            return response()->json(['error' => 'Credenciales no válidas'], 401);
+            return response()->json(['error' => 'Credenciales no válidas'], 405);
         } else {
-            $usuario->load('lista');
+            $usuario->load('lista','libros');
 
             $token = $usuario->createToken($usuario->nombre)->plainTextToken;
             return response()->json(['token' => $token,'usuario' => $usuario]);

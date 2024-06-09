@@ -141,6 +141,7 @@ class LibroController extends Controller
 
         $libro->save();
         
+        $libro->generos()->detach();
         foreach ($request['generosLibro'] as $genero) {
             if($genero['id'] == "otros"){
                 $genero = new Genero();

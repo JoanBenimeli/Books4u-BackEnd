@@ -21,7 +21,7 @@ class LibrosSeeder extends Seeder
 
         $autores->each(function($autor) use ($usuarios){
             $usuario = $usuarios->random();
-            Libro::factory()->count(5)->create([ 'id_autor' => $autor->id,'id_usuario' => $usuario->id]);
+            Libro::factory()->count(10)->create([ 'id_autor' => $autor->id,'id_usuario' => $usuario->id]);
         }); 
     }
 }
