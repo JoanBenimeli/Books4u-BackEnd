@@ -44,7 +44,7 @@ class UsuarioController extends Controller
     
             $extension = explode('/', $tipo)[1];
             $imagenDecodificada = base64_decode($datosBase64);
-            $nombreImagen = 'usuario_'.$request->id.'.' . $extension; 
+            $nombreImagen = 'usuario_'. uniqid().'.' . $extension; 
             $rutaImagen = public_path('img/usuario/' . $nombreImagen);
             
             $rutaImagenBD = '/img/usuario/' . $nombreImagen;

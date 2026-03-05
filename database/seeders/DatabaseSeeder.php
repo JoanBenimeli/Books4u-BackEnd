@@ -18,12 +18,12 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             AutoresSeeder::class,
             UsuariosSeeder::class,
-            ListasSeeder::class,
-            LibrosSeeder::class,
+            //ListasSeeder::class,
+            //LibrosSeeder::class,
             GeneroSeeder::class,
-            GeneroLibroSeeder::class,
-            ComentariosSeeder::class,
-            LocalesSeeder::class
+            //GeneroLibroSeeder::class,
+            //ComentariosSeeder::class,
+            //LocalesSeeder::class
         ]); 
     }
 }
